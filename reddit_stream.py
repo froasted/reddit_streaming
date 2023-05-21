@@ -12,9 +12,7 @@ if __name__ == "__main__":
     spark = (
         SparkSession.builder.appName("Reddit demo")
         .master("local[3]")
-        .config(
-            "spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.2"
-        )
+        .config("spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.2")
         .config("spark.streaming.stopGracefullyOnShutdown", "true")
         .getOrCreate()
     )
@@ -40,9 +38,7 @@ if __name__ == "__main__":
         .load()
     )
 
-    value_df = kafka_df.select(
-        from_json(col("value").cast("string"), schema).alias("value")
-    )
+    value_df = kafka_df.select(from_json(col("value").cast("string"), schema).alias("value"))
 
     explode_df = value_df.selectExpr(
         "value.submission_id",

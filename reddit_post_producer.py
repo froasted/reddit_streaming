@@ -57,11 +57,7 @@ def get_reddit_posts(reddit, subreddit_name, message_producer):
         data = {
             "submission_id": submission.id,
             "subreddit": subreddit_name,
-            "creation_time": str(
-                datetime.fromtimestamp(submission.created_utc).astimezone(
-                    tz.gettz("IST")
-                )
-            ),
+            "creation_time": str(datetime.fromtimestamp(submission.created_utc).astimezone(tz.gettz("IST"))),
             "title": submission.title,
             "author": submission.author.name,
             "is_NSFW": submission.over_18,
@@ -73,10 +69,8 @@ def get_reddit_posts(reddit, subreddit_name, message_producer):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "-creds", "--credentials",  help="path to the file with info to access the service"
-    )
-    parser.add_argument("-sub", "--subreddit",  help="the subreddit to fetch posts from")
+    parser.add_argument("-creds", "--credentials", help="path to the file with info to access the service")
+    parser.add_argument("-sub", "--subreddit", help="the subreddit to fetch posts from")
     parser.add_argument(
         "-b",
         "--broker",
