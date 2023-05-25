@@ -1,1 +1,1 @@
-$KAFKA_HOME/bin/kafka-topics.sh --bootstrap-server localhost:9092 --delete --topic $1
+$KAFKA_HOME/bin/kafka-topics.sh --bootstrap-server $1 --delete --topic $2
