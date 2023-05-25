@@ -32,16 +32,19 @@
  - Run the script [create_topic.sh](kafka_scripts%2Fcreate_topic.sh) to create a kafka topic to store metadata.
  Example : `bash create_topic.sh redditpost`
  - Run the file [reddit_post_producer.py](src%2Freddit_post_producer.py) :
- `python3 reddit_post_producer.py -creds credentials.ini -sub <subreddit_name> -b <kafka server host:port> -t <kafka topic name>`
- Example : `python3 reddit_post_producer.py -creds credentials.ini -sub AskReddit -b localhost:9092 -t redditpost`
+ `python3 src/reddit_post_producer.py -creds credentials.ini -sub <subreddit_name> -b <kafka server host:port> -t <kafka topic name>`
+ Example : `python3 src/reddit_post_producer.py -creds credentials.ini -sub AskReddit -b localhost:9092 -t redditpost`
  - Finally, run the file [reddit_stream.py](src%2Freddit_stream.py). It would fetch the data from kafka and perform the required pre-processing and then output the data to console.
 
+
+![reddit_kafka_streaming.gif](images%2Freddit_kafka_streaming.gif)
+
 ### Clean up 
-- Once the streaming job ends, make sure to delete the checkpoint directory. Otherwise we might face errors on stream restarts.
+- Once the streaming job ends, make sure to delete the checkpoint directory (chk-point-dir). Otherwise we might face errors on stream restarts.
 - Delete the data from kafka topic once done with processing using the [delete_topic_data.sh](kafka_scripts%2Fdelete_topic_data.sh).
 Example : `bash delete_topic_data.sh localhost:9092 redditpost`
 
-#### Extras
+### Extras
 
 - Used black to format all the python files `black . --exclude=venv`
   
